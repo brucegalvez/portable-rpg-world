@@ -1,0 +1,57 @@
+{
+  "format": "portable-rpg-world",
+  "version": 1,
+  "world": {
+    "id": "world:beacon",
+    "title": "Beacon Delta",
+    "extensions": {
+      "org.example.authoring": {
+        "version": 2,
+        "sourceKey": "Exact / key: Δ",
+        "unrecognized": {
+          "nested": [true, null, 3]
+        }
+      }
+    }
+  },
+  "entities": [
+    {
+      "id": "place:quay",
+      "kind": "place",
+      "name": "The Quay",
+      "description": "A silver tide marker stands on the quay.",
+      "relations": [],
+      "extensions": {}
+    },
+    {
+      "id": "person:watcher",
+      "kind": "person",
+      "name": "The Watcher",
+      "description": "Counts passing lanterns.",
+      "relations": [
+        {
+          "type": "locatedAt",
+          "target": "place:quay"
+        }
+      ],
+      "extensions": {
+        "org.example.extra": {
+          "version": 1,
+          "rules": "inert text, never executed",
+          "reference": "unmapped:original"
+        }
+      }
+    }
+  ],
+  "assets": [],
+  "omissions": [
+    {
+      "scopeId": "world:beacon",
+      "sourcePath": "/mechanics",
+      "code": "MISSING_MECHANICS",
+      "message": "This original fixture intentionally has no game mechanics.",
+      "disposition": "missing"
+    }
+  ],
+  "extensions": {}
+}

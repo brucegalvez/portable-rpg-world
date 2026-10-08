@@ -1,0 +1,35 @@
+{
+  "info.json": {
+    "kanka_version": "3.15",
+    "export_version": "3.15"
+  },
+  "settings/custom-modules.json": [],
+  "campaign.json": {
+    "id": 1,
+    "name": "Beacon Campaign",
+    "created_by": "discard-account"
+  },
+  "characters/watcher.json": {
+    "id": 10,
+    "name": "Watcher",
+    "entity": {
+      "id": 100,
+      "entity_id": 10,
+      "entry": "A watchful person.",
+      "entityLocations": [
+        {
+          "location_id": 20
+        }
+      ]
+    }
+  },
+  "locations/quay.json": {
+    "id": 20,
+    "name": "Quay",
+    "entity": {
+      "id": 200,
+      "entity_id": 20,
+      "entry": "A stone quay."
+    }
+  }
+}

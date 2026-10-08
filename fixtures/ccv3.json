@@ -1,0 +1,44 @@
+{
+  "spec": "chara_card_v3",
+  "spec_version": "3.0",
+  "data": {
+    "name": "Watcher",
+    "description": "Counts passing lanterns.",
+    "first_mes": "Another lantern!",
+    "personality": "Patient",
+    "scenario": "At the quay",
+    "mes_example": "",
+    "creator_notes": "Original fixture, not an application export.",
+    "system_prompt": "Inert prompt text",
+    "post_history_instructions": "",
+    "alternate_greetings": [],
+    "group_only_greetings": [],
+    "tags": [],
+    "creator": "",
+    "character_version": "1",
+    "extensions": {
+      "custom": {
+        "nested": "exact"
+      }
+    },
+    "character_book": {
+      "entries": [
+        {
+          "id": 4,
+          "name": "Quay",
+          "keys": ["quay"],
+          "content": "Silver tide marker.",
+          "extensions": {}
+        }
+      ]
+    },
+    "assets": [
+      {
+        "type": "icon",
+        "uri": "embeded://assets/icon/main.png",
+        "name": "main",
+        "ext": "png"
+      }
+    ]
+  }
+}

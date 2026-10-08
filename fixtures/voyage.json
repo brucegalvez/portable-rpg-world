@@ -1,0 +1,32 @@
+{
+  "heroesVersion": 36,
+  "regions": {
+    "Δ / coast": {
+      "name": "Delta Coast",
+      "basicInfo": "Grey reeds."
+    }
+  },
+  "locations": {
+    "Quay / exact": {
+      "name": "Quay",
+      "basicInfo": "Silver tide marker.",
+      "region": "Δ / coast"
+    }
+  },
+  "npcs": {
+    "Watcher": {
+      "name": "Watcher",
+      "currentLocation": "Quay / exact"
+    }
+  },
+  "realms": {},
+  "factions": {},
+  "itemTypes": {},
+  "worldLore": {},
+  "quests": {},
+  "narrativeEvents": {},
+  "mods": [],
+  "skillSettings": {
+    "maxSkillLevel": 9
+  }
+}

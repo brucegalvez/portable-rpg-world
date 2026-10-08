@@ -1,0 +1,44 @@
+{
+  "project/.craft/project.json": {
+    "name": "Beacon CDF",
+    "description": "Original synthetic world."
+  },
+  "project/.craft/file-types/character.json": {
+    "slug": "character",
+    "designation": "character",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "project/.craft/base/duplicate.character.json": {
+    "$craft": {
+      "referenceId": "char:watch"
+    },
+    "name": "Baseline must not count"
+  },
+  "project/Watcher.character.json": {
+    "$craft": {
+      "referenceId": "char:watch"
+    },
+    "name": "Watcher",
+    "description": "Counts lanterns.",
+    "location": {
+      "referenceId": "place:quay",
+      "fileTypeSlug": "location",
+      "slug": "quay"
+    }
+  },
+  "project/Quay.location.json": {
+    "$craft": {
+      "referenceId": "place:quay"
+    },
+    "name": "Quay",
+    "description": "A quay"
+  },
+  "project/Notes.lore.md": "---\nname: Notes\n$craft:\n  referenceId: lore:notes\n---\nLanterns pass at dusk."
+}

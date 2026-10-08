@@ -1,0 +1,20 @@
+[
+  {
+    "keys": "quay,beacon",
+    "value": "The quay holds a silver tide marker.",
+    "type": "location",
+    "title": "The Quay",
+    "description": "Authored note",
+    "useForCharacterCreation": false
+  },
+  {
+    "keys": "watcher",
+    "value": "Counts passing lanterns.",
+    "type": "character",
+    "title": "The Watcher",
+    "isPinned": true,
+    "unknownAuthoredField": {
+      "nested": 7
+    }
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "exportId": "discard-export-run",
+  "exportedAt": "discard-time",
+  "resourceCount": 2,
+  "hash": "source-integrity-only",
+  "resources": [
+    {
+      "id": "resource:alpha",
+      "name": "Beacon",
+      "documents": [
+        {
+          "id": "page:a",
+          "type": "page",
+          "content": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "text",
+                "text": "A beacon."
+              },
+              {
+                "type": "mention",
+                "attrs": {
+                  "id": "resource:beta",
+                  "text": "Watch"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "createdBy": "discard-account"
+    },
+    {
+      "id": "resource:beta",
+      "name": "Watch",
+      "documents": []
+    }
+  ],
+  "calendars": [
+    {
+      "id": "calendar:authored",
+      "name": "Tides"
+    }
+  ]
+}

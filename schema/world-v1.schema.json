@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:portable-rpg-world:schema:1",
+  "title": "Portable RPG World version 1",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "world",
+    "entities",
+    "assets",
+    "omissions",
+    "extensions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "portable-rpg-world"
+    },
+    "version": {
+      "const": 1
+    },
+    "world": {
+      "type": "object",
+      "required": ["id", "title", "extensions"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "assetIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+          }
+        },
+        "extensions": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z][a-z0-9-]*)+$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "required": ["version"],
+            "properties": {
+              "version": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "maxItems": 12000,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "name", "relations", "extensions"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+          },
+          "kind": {
+            "enum": [
+              "place",
+              "person",
+              "item",
+              "group",
+              "lore",
+              "objective",
+              "event"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "assetIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+            }
+          },
+          "extensions": {
+            "type": "object",
+            "propertyNames": {
+              "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z][a-z0-9-]*)+$"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "required": ["version"],
+              "properties": {
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "relations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "target"],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "maxItems": 12000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "mediaType",
+          "sha256",
+          "byteLength",
+          "path",
+          "role",
+          "rights"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+          },
+          "mediaType": {
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "image/webp",
+              "image/gif",
+              "audio/mpeg",
+              "audio/ogg",
+              "audio/wav",
+              "audio/flac",
+              "video/mp4",
+              "model/gltf-binary",
+              "text/plain",
+              "model/stl"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "byteLength": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 33554432
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^assets/[a-f0-9]{64}\\.(?:png|jpg|webp|gif|mp3|ogg|wav|flac|mp4|glb|obj|stl)$"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rights": {
+            "type": "object",
+            "required": ["basis"],
+            "properties": {
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "attribution": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "sourceUrl": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "omissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scopeId", "sourcePath", "code", "message", "disposition"],
+        "additionalProperties": false,
+        "properties": {
+          "scopeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+          },
+          "sourcePath": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "message": {
+            "type": "string"
+          },
+          "disposition": {
+            "enum": [
+              "unmapped",
+              "unsupported",
+              "missing",
+              "external",
+              "rights-restricted",
+              "invalid"
+            ]
+          },
+          "targetKind": {
+            "type": "string"
+          },
+          "sourceFormat": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z][a-z0-9-]*)+$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["version"],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "portableGraph": true
+}

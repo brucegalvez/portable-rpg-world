@@ -1,0 +1,50 @@
+{
+  "name": "world-format",
+  "version": "1.0.0",
+  "description": "Portable RPG World: independent bounded file converters and versioned authored-world archives",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brucegalvez/portable-rpg-world.git"
+  },
+  "homepage": "https://github.com/brucegalvez/portable-rpg-world#readme",
+  "bugs": {
+    "url": "https://github.com/brucegalvez/portable-rpg-world/issues"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./schema": "./schema/world-v1.schema.json",
+    "./types": "./src/types.ts",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "portable-rpg-world": "./bin/portable-rpg-world.ts"
+  },
+  "files": [
+    "src",
+    "bin",
+    "schema",
+    "fixtures",
+    "SPEC.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "^5.9.2"
+  }
+}

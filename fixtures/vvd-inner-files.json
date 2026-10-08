@@ -1,0 +1,50 @@
+{
+  "world.json": {
+    "id": "world:beacon",
+    "name": "Beacon VVD"
+  },
+  "entity-types.json": {
+    "types": {
+      "character": {
+        "id": "character",
+        "parent_type_id": null
+      }
+    }
+  },
+  "links.json": [
+    {
+      "source_id": "card:watch",
+      "kind": "member-card",
+      "target_id": "card:quay"
+    }
+  ],
+  "documents/watch.json": {
+    "id": "card:watch",
+    "name": "Watch",
+    "document_type": "card",
+    "entity_type_key": "character",
+    "parent_id": "card:quay",
+    "plainText": "Counts lanterns."
+  },
+  "documents/quay.json": {
+    "id": "card:quay",
+    "name": "Quay",
+    "document_type": "map",
+    "plainText": "Map tool data",
+    "content": {
+      "type": "map",
+      "bounds": [0, 1, 2, 3]
+    }
+  },
+  "media.json": {
+    "entries": [
+      {
+        "id": "image:beacon",
+        "filename": "beacon.png",
+        "mimeType": "image/png",
+        "included": true,
+        "path": "media/beacon.png"
+      }
+    ]
+  }
+}
