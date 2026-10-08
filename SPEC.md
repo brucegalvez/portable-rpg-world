@@ -12,8 +12,20 @@ A neutral archive is an ordinary ZIP containing UTF-8 `world.json` at its root a
   "version": 1,
   "world": { "id": "world:beacon", "title": "Beacon", "extensions": {} },
   "entities": [
-    { "id": "place:quay", "kind": "place", "name": "Quay", "relations": [], "extensions": {} },
-    { "id": "person:watch", "kind": "person", "name": "Watch", "relations": [{ "type": "locatedAt", "target": "place:quay" }], "extensions": {} }
+    {
+      "id": "place:quay",
+      "kind": "place",
+      "name": "Quay",
+      "relations": [],
+      "extensions": {}
+    },
+    {
+      "id": "person:watch",
+      "kind": "person",
+      "name": "Watch",
+      "relations": [{ "type": "locatedAt", "target": "place:quay" }],
+      "extensions": {}
+    }
   ],
   "assets": [],
   "omissions": [],
@@ -39,16 +51,16 @@ Relations are `{ "type": "locatedAt", "target": "place:quay" }`. Common types ar
 
 Source extensions use `sourceFormat`, `sourceIdentity`, `sourcePath`, and `rawData`; optional source descriptors and media bindings associate preserved records with manifested assets. The adapters use these namespaces:
 
-| Source | Namespace |
-| --- | --- |
-| AI Dungeon | `com.aidungeon.storycards` |
-| Craft / F&F CDF | `io.craftrpgs.cdf` |
-| Voyage | `io.voyage.export` |
-| vvd | `world.vvd.export` |
-| LegendKeeper | `com.legendkeeper.export` |
-| Kanka | `io.kanka.export` |
-| CCv3 | `org.character-card.v3` |
-| World Anvil HTML | `com.worldanvil.html` |
+| Source           | Namespace                  |
+| ---------------- | -------------------------- |
+| AI Dungeon       | `com.aidungeon.storycards` |
+| Craft / F&F CDF  | `io.craftrpgs.cdf`         |
+| Voyage           | `io.voyage.export`         |
+| vvd              | `world.vvd.export`         |
+| LegendKeeper     | `com.legendkeeper.export`  |
+| Kanka            | `io.kanka.export`          |
+| CCv3             | `org.character-card.v3`    |
+| World Anvil HTML | `com.worldanvil.html`      |
 
 Native applications can publish a versioned extension in their namespace. Reserved `ai.believein.studio` version 1 uses `{ "version": 1, "sections": {}, "records": [{ "id": "...", "kind": "...", "fields": {} }] }` with portable references and unchanged stat/tile keys. The independent format library treats this payload as inert JSON; it does not import that application's Prisma schema, validate executable mechanics, or invoke database mutations. Unknown native fields remain opaque.
 
@@ -84,17 +96,17 @@ Reference adapter codes include `SOURCE_SCOPE_INCOMPLETE`, `OPAQUE_AUTHORED_CONT
 
 The reference implementation enforces the following public `WORLD_FILE_LIMITS`:
 
-| Limit | Value |
-| --- | --- |
-| Input / encoded ZIP bytes | 64 MiB |
-| Cumulative expanded bytes across archive layers | 256 MiB |
-| Cumulative members across layers, including directories | 12,000 |
-| Archive nesting | 2 layers (vvd outer plus inner backup) |
-| Expanded member / JSON bytes | 64 MiB |
-| Per-asset bytes | 32 MiB |
-| JSON nesting | 80 |
-| JSON nodes | 2,000,000 |
-| Deflate/gzip ratio | at most 1,000×, with 1 MiB allowance for tiny compressed files |
+| Limit                                                   | Value                                                          |
+| ------------------------------------------------------- | -------------------------------------------------------------- |
+| Input / encoded ZIP bytes                               | 64 MiB                                                         |
+| Cumulative expanded bytes across archive layers         | 256 MiB                                                        |
+| Cumulative members across layers, including directories | 12,000                                                         |
+| Archive nesting                                         | 2 layers (vvd outer plus inner backup)                         |
+| Expanded member / JSON bytes                            | 64 MiB                                                         |
+| Per-asset bytes                                         | 32 MiB                                                         |
+| JSON nesting                                            | 80                                                             |
+| JSON nodes                                              | 2,000,000                                                      |
+| Deflate/gzip ratio                                      | at most 1,000×, with 1 MiB allowance for tiny compressed files |
 
 ZIP directory metadata is preflighted before expansion. Streaming fflate decompression checks actual output against each declared size; both outer and inner containers share a cumulative budget. Reject absolute paths, drive prefixes, traversal, backslashes, control characters, percent-encoded path ambiguity, normalized/case-folded duplicates, local/central disagreement, overlaps, symlinks, encryption, split archives, ZIP64, unsupported compression and CRC failure. A JPEG-prefix CHARX polyglot is recognized; arbitrary prefixed software is not. UTF-8 decoding is strict. JSON prototype keys and non-JSON objects/numbers are rejected. No included code runs. Consumers should still treat parsing as untrusted work and isolate CPU/memory according to their service policy.
 

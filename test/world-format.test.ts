@@ -397,7 +397,13 @@ test("private source data and URL credentials/tokens excluded while unknown auth
     "---\nname: Notes\ncredentials:\n  arbitrary: PRIVATE_NESTED\n$craft:\n  referenceId: lore:notes\n---\nSafe writing.";
   const parsed = await parseWorldFile(zipSync(files(raw)), "cdf.zip");
   const serialized = JSON.stringify(parsed.document);
-  for (const secret of ["PRIVATE_ACCOUNT", "PRIVATE_TRACK", "PRIVATE_TOKEN", "PRIVATE_NESTED"]) assert.ok(!serialized.includes(secret));
+  for (const secret of [
+    "PRIVATE_ACCOUNT",
+    "PRIVATE_TRACK",
+    "PRIVATE_TOKEN",
+    "PRIVATE_NESTED",
+  ])
+    assert.ok(!serialized.includes(secret));
   assert.ok(serialized.includes("customAuthored"));
   assert.ok(
     parsed.document.omissions.some(
@@ -566,7 +572,8 @@ test("World Anvil only accepts observed official HTML fallback, excludes scripts
     '<!DOCTYPE html><html><head><title>World Anvil</title></head><body class="print-interface"><h1 class="world-title">Beacon</h1><span class="world-authors">PRIVATE_ACCOUNT</span><h1>Articles</h1><h1>Timelines</h1><script>PRIVATE_SCRIPT</script></body></html>';
   const parsed = await parseWorldFile(textBytes(html), "world.html");
   assert.equal(parsed.document.entities.length, 0);
-  for (const secret of ["PRIVATE_ACCOUNT", "PRIVATE_SCRIPT"]) assert.ok(!JSON.stringify(parsed.document).includes(secret));
+  for (const secret of ["PRIVATE_ACCOUNT", "PRIVATE_SCRIPT"])
+    assert.ok(!JSON.stringify(parsed.document).includes(secret));
   assert.ok(
     parsed.document.omissions.some((o) => o.code === "HTML_GRAPH_UNAVAILABLE"),
   );
@@ -643,7 +650,13 @@ test("neutral extensions filter credentials/tracking on all scopes but preserve 
     ],
   };
   const filtered = parsePortableWorld(document);
-  for (const secret of ["PRIVATE_TOKEN", "PRIVATE_SYNC", "PRIVATE_EMAIL", "PRIVATE_NATIVE_KEY"]) assert.ok(!JSON.stringify(filtered).includes(secret));
+  for (const secret of [
+    "PRIVATE_TOKEN",
+    "PRIVATE_SYNC",
+    "PRIVATE_EMAIL",
+    "PRIVATE_NATIVE_KEY",
+  ])
+    assert.ok(!JSON.stringify(filtered).includes(secret));
   assert.ok(JSON.stringify(document).includes("PRIVATE_TOKEN"));
   const native = filtered.world.extensions["ai.believein.studio"]!.records as {
     fields: { source: string };
@@ -765,7 +778,16 @@ test("native authored container hosts and opening references survive privacy fil
   ]) {
     assert.deepEqual(extensions["ai.believein.studio"]!.records, expected);
   }
-  for (const secret of ["PRIVATE_OWNER", "PRIVATE_NESTED", "PRIVATE_TOKEN", "PRIVATE_UNKNOWN", "PRIVATE_UNDECLARED", "PRIVATE_WORKSPACE", "PRIVATE_CRAFT_WORKSPACE"]) assert.ok(!JSON.stringify(filtered).includes(secret));
+  for (const secret of [
+    "PRIVATE_OWNER",
+    "PRIVATE_NESTED",
+    "PRIVATE_TOKEN",
+    "PRIVATE_UNKNOWN",
+    "PRIVATE_UNDECLARED",
+    "PRIVATE_WORKSPACE",
+    "PRIVATE_CRAFT_WORKSPACE",
+  ])
+    assert.ok(!JSON.stringify(filtered).includes(secret));
   assert.equal(
     document.extensions["ai.believein.studio"]!.containerId,
     "PRIVATE_WORKSPACE",
